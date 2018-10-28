@@ -1,4 +1,4 @@
-package com.example.camera_image;
+package com.example.camera_image.mvp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.camera_image.utils.Constants;
+import com.example.camera_image.data.RealmModel;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;

@@ -1,10 +1,17 @@
-package com.example.camera_image;
+package com.example.camera_image.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.camera_image.utils.Constants;
+import com.example.camera_image.utils.PermissionUtils;
+import com.example.camera_image.R;
+import com.example.camera_image.data.RealmModel;
+import com.example.camera_image.mvp.MainContract;
+import com.example.camera_image.mvp.MainPresenterImpl;
 
 import java.util.List;
 
@@ -14,6 +21,8 @@ import butterknife.OnClick;
 /**
  *
  */
+
+// Need to take a new picture
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
 

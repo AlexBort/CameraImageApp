@@ -1,6 +1,8 @@
-package com.example.camera_image;
+package com.example.camera_image.mvp;
 
 import android.net.Uri;
+
+import com.example.camera_image.data.RealmModel;
 
 import java.util.ArrayList;
 import java.util.List;

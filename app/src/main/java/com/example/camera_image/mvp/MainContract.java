@@ -1,9 +1,10 @@
-package com.example.camera_image;
+package com.example.camera_image.mvp;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+
+import com.example.camera_image.data.RealmModel;
 
 import java.util.List;
 

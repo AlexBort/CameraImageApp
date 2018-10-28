@@ -1,4 +1,4 @@
-package com.example.camera_image;
+package com.example.camera_image.utils;
 
 import android.Manifest;
 

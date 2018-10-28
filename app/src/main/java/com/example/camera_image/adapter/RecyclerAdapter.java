@@ -1,4 +1,4 @@
-package com.example.camera_image;
+package com.example.camera_image.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.camera_image.R;
+import com.example.camera_image.data.RealmModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -25,6 +29,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(Context context, List<RealmModel> uriList) {
         this.uriList = uriList;
         this.context = context;
+    }
+
+    public RecyclerAdapter(Context context) {
+        //   this.uriList = uriList;
+        this.context = context;
 
     }
 
@@ -39,18 +48,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, final int position) {
+        String testUrl = "https://scontent.fiev7-2.fna.fbcdn.net/v/t1.0-9/44961129_676854412698391_7891029656436998144_n.jpg?_nc_cat=100&_nc_ht=scontent.fiev7-2.fna&oh=9b95ae7a2a08919e3ef356d78fe9e46a&oe=5C494D64";
+        //  Uri uri = Uri.parse(uriList.get(position).getUriString());
+        //    holder.cameraImage.setImageURI(uri);
+        //"http://i.imgur.com/DvpvklR.png"
+        Picasso.get().load(testUrl).into(holder.cameraImage);
 
-        Uri uri = Uri.parse(uriList.get(position).getUriString());
-        holder.cameraImage.setImageURI(uri);
-//        holder.firstName.setText(uriList.get(position).getName().getFirst());
-//        Picasso.get().load(uriList.get(position).getPicture().getMedium()).into(holder.cameraImage);
         holder.clickItem();
 
         holder.shareImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 28.10.2018 вот здесь мы делаем Intent!!
+                //   Toast.makeText(context, "SHARE!!", Toast.LENGTH_SHORT).show();
+
+                holder.callShare(/*uriList.get(position)*/null);
             }
         });
 
@@ -59,7 +71,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return uriList.size();
+        return 3 /*uriList.size()*/;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,22 +88,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             view = itemView;
             ButterKnife.bind(this, view);
             //    cameraImage = itemView.findViewById(R.id.camera_image);
-
-
         }
 
-        public void callShare() {
+        public void callShare(final RealmModel realmModel) {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-            sharingIntent.setType("image/jpeg");
-            
+//            sharingIntent.setType("image/jpeg");
+            sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            sharingIntent.setType("image/*");
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://media/external/images/media/37230") /*Uri.parse(realmModel.getUriString())*/);
+            view.getContext().startActivity(Intent.createChooser(sharingIntent, "Share Image Using"));
+
         }
 
         public void clickItem(/*final RealmModel realmModel*/) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    // TODO: 28.10.2018 здесь будем делать visibility of
+                    shareImage.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -102,7 +115,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 //            return bStream.toByteArray();
 //        }
 
-
     }
-
 }
