@@ -51,8 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, final int position) {
         String testUrl = "https://scontent.fiev7-2.fna.fbcdn.net/v/t1.0-9/44961129_676854412698391_7891029656436998144_n.jpg?_nc_cat=100&_nc_ht=scontent.fiev7-2.fna&oh=9b95ae7a2a08919e3ef356d78fe9e46a&oe=5C494D64";
         final Uri uri = Uri.parse(uriList.get(position).getUriString());
-        //   holder.cameraImage.setImageURI(uri);
-        //"http://i.imgur.com/DvpvklR.png"
+        //       holder.cameraImage.setImageURI(uri);
 
         Picasso.get().load(uri).into(holder.cameraImage);
 
@@ -60,8 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.shareImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //   Toast.makeText(context, "SHARE!!", Toast.LENGTH_SHORT).show();
-                holder.callShare(/*uriList.get(position)*/uriList.get(position));
+                holder.callShare(uriList.get(position));
             }
         });
 
@@ -70,7 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return uriList.size() /*uriList.size()*/;
+        return uriList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
