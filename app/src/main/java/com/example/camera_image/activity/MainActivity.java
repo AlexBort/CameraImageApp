@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.camera_image.mvp.Contract;
 import com.example.camera_image.mvp.PresenterImpl;
 import com.example.camera_image.utils.Constants;
 import com.example.camera_image.utils.PermissionUtils;
@@ -15,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity /*implements Contract.View*/{
 
     private PresenterImpl presenter;
 
@@ -26,7 +27,13 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initPresenter();
-        presenter.getList(); // FIXME: 28.10.2018 нужно ли здесь вызывать!?
+  //      presenter.getList(); // FIXME: 28.10.2018 нужно ли здесь вызывать!?
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 
     private void initPresenter() {

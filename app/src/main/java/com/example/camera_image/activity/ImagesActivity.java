@@ -35,6 +35,11 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
         // presenter.initView(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

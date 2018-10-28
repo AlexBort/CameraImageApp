@@ -47,6 +47,11 @@ public class PresenterImpl implements Contract.Presenter, Contract.Repository.Re
 //    }
 
     @Override
+    public void onDestroy() {
+        repository.closeRealm();
+    }
+
+    @Override
     public void callCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         mActivity.startActivityForResult(intent, Constants.ACTION_CAMERA);

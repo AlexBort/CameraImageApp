@@ -13,6 +13,8 @@ public interface Contract {
 
     interface Presenter {
 
+        void onDestroy();
+
         void callCamera();
 
         void onCameraResult(Intent data);
@@ -33,6 +35,8 @@ public interface Contract {
 
     interface View {
         void presentListImages(List<RealmModel> uriList);
+
+        void onDestroy();
         //   void launchListImageActivity(List<RealmModel> uriList);
     }
 
@@ -42,6 +46,7 @@ public interface Contract {
             void getRealmListUri(List<RealmModel> uriList);
         }
 
+        void closeRealm();
 
         void transformToList(String uriString, RepositoryListener listener);
 
