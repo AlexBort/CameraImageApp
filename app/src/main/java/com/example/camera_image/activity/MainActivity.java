@@ -14,22 +14,10 @@ import com.example.camera_image.R;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- *
- */
 
-// Need to take a new picture
-
-public class MainActivity extends AppCompatActivity /*implements Contract.View*/ {
+public class MainActivity extends AppCompatActivity {
 
     private PresenterImpl presenter;
-
-    private void initPresenter() {
-        presenter = PresenterImpl.getInstancePresenter();
-        presenter.initActivityContext(this);
-        presenter.initContext(getBaseContext());
-        //  presenter.initView(this);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +25,16 @@ public class MainActivity extends AppCompatActivity /*implements Contract.View*/
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //   presenter = new PresenterImpl(getBaseContext(), this, this);
         initPresenter();
-        presenter.getList();
-
+        presenter.getList(); // FIXME: 28.10.2018 нужно ли здесь вызывать!?
     }
+
+    private void initPresenter() {
+        presenter = PresenterImpl.getInstancePresenter();
+        presenter.initActivityContext(this);
+        presenter.initContext(getBaseContext());
+    }
+
 
     @OnClick(R.id.call_activity)
     public void startImageActivity() {
@@ -65,18 +58,4 @@ public class MainActivity extends AppCompatActivity /*implements Contract.View*/
                 break;
         }
     }
-
-//    @Override
-//    public void launchListImageActivity() {
-//        startActivity(new Intent(this, ImagesActivity.class));
-//    }
-
-   /* @Override
-    public void presentListImages(List<RealmModel> uriList) {
-  *//*      Intent intent = new Intent(MainActivity.this, ImagesActivity.class);
-//        intent.
-        startActivity(intent);
-        // FIXME: 28.10.2018 как передадим целый list через интент??
-*//*
-    }*/
 }

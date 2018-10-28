@@ -31,20 +31,6 @@ public class PermissionUtils {
     }
 
 
-    public static boolean checkPermission(Fragment fragment, String[] permission) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (isPermissionGranted(fragment.getContext(), permission)) {
-                // Permission Granted Already
-                return true;
-            }
-            // Request Permission
-            requestPermission(fragment, permission);
-        } else {
-            return true;
-        }
-        return false;
-    }
-
     public static boolean checkPermission(Activity activity, String permission) {
         return checkPermission(activity, new String[]{permission});
     }
@@ -80,24 +66,6 @@ public class PermissionUtils {
     }
 
 
-    public static boolean checkShouldShowRequestPermission(Fragment fragment, String[] permissions) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        for (String permission : permissions)
-            if (!fragment.shouldShowRequestPermissionRationale(permission)) {
-                return false;
-            }
-//        }
-        return true;
-    }
 
-    public static boolean checkShouldShowRequestPermission(Activity activity, String[] permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String permission : permissions)
-                if (!activity.shouldShowRequestPermissionRationale(permission)) {
-                    return false;
-                }
-        }
-        return true;
-    }
 
 }

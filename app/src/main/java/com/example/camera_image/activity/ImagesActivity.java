@@ -19,13 +19,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ImagesActivity extends AppCompatActivity implements Contract.View {
+public class ImagesActivity extends AppCompatActivity /*implements Contract.View*/ {
 
     private static final String TAG = "ImagesActivity";
     private PresenterImpl presenter;
-//    @BindView(R.id.camera_image)
-//    ImageView imageView;
-
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -33,7 +30,9 @@ public class ImagesActivity extends AppCompatActivity implements Contract.View {
         presenter = PresenterImpl.getInstancePresenter();
         presenter.initActivityContext(this);
         presenter.initContext(getBaseContext());
-        presenter.initView(this);
+
+        // FIXME: 28.10.2018 удалить initView
+        // presenter.initView(this);
     }
 
 
@@ -44,18 +43,18 @@ public class ImagesActivity extends AppCompatActivity implements Contract.View {
         ButterKnife.bind(this);
 
         initPresenter();
-        // presenter.passListToView();
+        // FIXME: 28.10.2018 удалить потом: presenter.passListToView();
         fillRecyclerView();
     }
 
-    @Override
+   /* @Override
     public void presentListImages(List<RealmModel> uriList) {
         Uri uri = Uri.parse(uriList.get(0).getUriString());
         //     imageView.setImageURI(uri);
         //    else Toast.makeText(ImagesActivity.this, "", Toast.LENGTH_SHORT).show();
         Log.e(TAG, "presentListImages: " + String.valueOf(uriList.size()));
         recyclerView.setAdapter(new RecyclerAdapter(getBaseContext()));
-    }
+    }*/
 
 
     private void fillRecyclerView() {

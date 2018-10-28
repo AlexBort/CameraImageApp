@@ -59,6 +59,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.shareImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //    holder.getAdapterPosition()
+                //position
                 holder.callShare(uriList.get(position));
             }
         });
@@ -92,10 +94,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 //            sharingIntent.setType("image/jpeg");
             sharingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
             sharingIntent.setType("image/*");
-            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://media/external/images/media/37230") /*Uri.parse(realmModel.getUriString())*/);
+            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(realmModel.getUriString()) /*Uri.parse(realmModel.getUriString())*/);
             view.getContext().startActivity(Intent.createChooser(sharingIntent, "Share Image Using"));
 
         }
+
 
 //        public void clickItem(/*final RealmModel realmModel*/) {
 //            itemView.setOnClickListener(new View.OnClickListener() {

@@ -26,7 +26,6 @@ public class PresenterImpl implements Contract.Presenter, Contract.Repository.Re
     private Activity mActivity;
     private static Contract.Repository repository;
     private static List<RealmModel> realmList;
-    //   private static final int ACTION_CAMERA = 43;
 
     private static PresenterImpl mainPresenter = new PresenterImpl();
 

@@ -24,7 +24,6 @@ public class NotificationService extends Service {
 
 
     private static final String TAG = "NotificationService";
-
     private Timer timer;
 
     @Override
@@ -47,7 +46,6 @@ public class NotificationService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

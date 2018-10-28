@@ -18,7 +18,6 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/marg_10"
         android:layout_toRightOf="@+id/camera_image"
-        android:background="@drawable/ic_share_black_24dp"
-     />
+        android:background="@drawable/ic_share_black_24dp" />
 
 </RelativeLayout>
