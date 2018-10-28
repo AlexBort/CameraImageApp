@@ -5,8 +5,15 @@
 
     <ImageView
         android:id="@+id/camera_image"
-        android:layout_marginTop="@dimen/marg_15"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marg_15" />
+
+    <ImageView
+        android:id="@+id/share_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_share_black_24dp" />
 
 </RelativeLayout>
