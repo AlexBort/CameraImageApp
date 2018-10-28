@@ -19,13 +19,27 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private MainPresenterImpl presenter;
 
+    private void initPresenter() {
+        presenter = MainPresenterImpl.getIsntancePresenter();
+        presenter.initActivityContext(this);
+        presenter.initContext(getBaseContext());
+        //  presenter.initView(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        presenter = new MainPresenterImpl(getBaseContext(), this, this);
+        //   presenter = new MainPresenterImpl(getBaseContext(), this, this);
+        initPresenter();
+
+    }
+
+    @OnClick(R.id.call_activity)
+    public void startImageActivity() {
+        startActivity(new Intent(MainActivity.this, ImagesActivity.class));
     }
 
     @OnClick(R.id.button_camera)
@@ -52,11 +66,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 //    }
 
     @Override
-    public void launchListImageActivity(List<RealmModel> uriList) {
-        Intent intent = new Intent(MainActivity.this, ImagesActivity.class);
+    public void presentListImages(List<RealmModel> uriList) {
+  /*      Intent intent = new Intent(MainActivity.this, ImagesActivity.class);
 //        intent.
         startActivity(intent);
         // FIXME: 28.10.2018 как передадим целый list через интент??
-
+*/
     }
 }

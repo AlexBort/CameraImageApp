@@ -12,12 +12,12 @@ public class MainRepositoryImpl implements MainContract.MainRepository {
 
 
     @Override
-    public void transformToList(Uri uri, final RepositoryListener listener) {
+    public void transformToList(String uriString, final RepositoryListener listener) {
         List<Uri> uriList = new ArrayList<>();
 
         //uriList.add(uri);
-        final RealmModel realmModel = toRealmObject(uri);
         Realm realm = configRealm();
+        final RealmModel realmModel = toRealmObject(uriString);
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -28,15 +28,12 @@ public class MainRepositoryImpl implements MainContract.MainRepository {
     }
 
 
-    private RealmModel toRealmObject(Uri uri) {
+    private RealmModel toRealmObject(String uriString) {
         RealmModel realmModel = new RealmModel();
-        realmModel.setUri(uri);
+        realmModel.setUriString(uriString);
         return realmModel;
     }
 
-    void workWithRealm() {
-
-    }
 
     private List<RealmModel> getList() {
         Realm realm = Realm.getDefaultInstance();

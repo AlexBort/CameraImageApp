@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_button">7dp</dimen>
+    <dimen name="marg_15">15dp</dimen>
+    <dimen name="marg_7">7dp</dimen>
 </resources>
