@@ -37,9 +37,12 @@ public class RepositoryImpl implements Contract.Repository {
     }
 
 
-    private List<RealmModel> getList() {
+    public List<RealmModel> getList() {
         Realm realm = Realm.getDefaultInstance();
-        return realm.where(RealmModel.class).findAll();
+        List<RealmModel> list = realm.where(RealmModel.class).findAll();
+        if (list != null)
+            return list;
+        return null;
     }
 
 

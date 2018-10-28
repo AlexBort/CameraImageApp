@@ -26,6 +26,8 @@ public interface Contract {
         void initPerformList(List<RealmModel> uriList);
 
         void passListToView();
+
+        List<RealmModel> getList();
     }
 
 
@@ -40,8 +42,10 @@ public interface Contract {
             void getRealmListUri(List<RealmModel> uriList);
         }
 
+
         void transformToList(String uriString, RepositoryListener listener);
 
+        List<RealmModel> getList();
         //    void toRealmObject(Uri uri);
     }
 }

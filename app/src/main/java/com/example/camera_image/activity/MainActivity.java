@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity /*implements Contract.View*/
     private PresenterImpl presenter;
 
     private void initPresenter() {
-        presenter = PresenterImpl.getIsntancePresenter();
+        presenter = PresenterImpl.getInstancePresenter();
         presenter.initActivityContext(this);
         presenter.initContext(getBaseContext());
         //  presenter.initView(this);
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity /*implements Contract.View*/
 
         //   presenter = new PresenterImpl(getBaseContext(), this, this);
         initPresenter();
+        presenter.getList();
 
     }
 

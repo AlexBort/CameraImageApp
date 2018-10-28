@@ -3,4 +3,7 @@
     <dimen name="padding_button">7dp</dimen>
     <dimen name="marg_15">15dp</dimen>
     <dimen name="marg_7">7dp</dimen>
+    <dimen name="size_image">150dp</dimen>
+    <dimen name="size_share">25dp</dimen>
+    <dimen name="marg_10">10dp</dimen>
 </resources>

@@ -5,16 +5,20 @@
 
     <ImageView
         android:id="@+id/camera_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/marg_15" />
+        android:layout_width="@dimen/size_image"
+        android:layout_height="@dimen/size_image"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/marg_15"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/share_image"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
+        android:layout_width="@dimen/size_share"
+        android:layout_height="@dimen/size_share"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/marg_10"
+        android:layout_toRightOf="@+id/camera_image"
         android:background="@drawable/ic_share_black_24dp"
-        android:visibility="gone" />
+     />
 
 </RelativeLayout>

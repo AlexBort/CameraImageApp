@@ -30,7 +30,7 @@ public class ImagesActivity extends AppCompatActivity implements Contract.View {
     RecyclerView recyclerView;
 
     private void initPresenter() {
-        presenter = PresenterImpl.getIsntancePresenter();
+        presenter = PresenterImpl.getInstancePresenter();
         presenter.initActivityContext(this);
         presenter.initContext(getBaseContext());
         presenter.initView(this);
@@ -44,7 +44,7 @@ public class ImagesActivity extends AppCompatActivity implements Contract.View {
         ButterKnife.bind(this);
 
         initPresenter();
-        presenter.passListToView();
+        // presenter.passListToView();
         fillRecyclerView();
     }
 
@@ -63,7 +63,11 @@ public class ImagesActivity extends AppCompatActivity implements Contract.View {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, mLinearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setLayoutManager(mLinearLayoutManager);
-        recyclerView.setAdapter(new RecyclerAdapter(getBaseContext()));
+        if (presenter.getList() != null) {
+            recyclerView.setAdapter(new RecyclerAdapter(getBaseContext(), presenter.getList()));
+            Log.e(TAG, "fillRecyclerView: " + String.valueOf(presenter.getList().size()));
+        }
+
     }
 
 }

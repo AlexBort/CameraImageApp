@@ -25,7 +25,7 @@ public class PresenterImpl implements Contract.Presenter, Contract.Repository.Re
     private Contract.View mView;
     private Activity mActivity;
     private static Contract.Repository repository;
-    private static List<RealmModel> realmlList;
+    private static List<RealmModel> realmList;
     //   private static final int ACTION_CAMERA = 43;
 
     private static PresenterImpl mainPresenter = new PresenterImpl();
@@ -33,8 +33,9 @@ public class PresenterImpl implements Contract.Presenter, Contract.Repository.Re
     private PresenterImpl() {
     }
 
-    public static PresenterImpl getIsntancePresenter() {
+    public static PresenterImpl getInstancePresenter() {
         repository = new RepositoryImpl();
+        if (repository.getList() != null) realmList = repository.getList();
         return mainPresenter;
     }
 
@@ -102,21 +103,23 @@ public class PresenterImpl implements Contract.Presenter, Contract.Repository.Re
         return Uri.parse(path);
     }
 
-//    public static List<RealmModel> getList() {
-//        return realmlList;
-//    }
+    public List<RealmModel> getList() {
+        if (repository.getList() != null)
+            return repository.getList();
+        return null;
+    }
 
     @Override
     public void passListToView() {
-        if (realmlList != null)
-            mView.presentListImages(realmlList);
+        if (realmList != null)
+            mView.presentListImages(realmList);
     }
 
     @Override
     public void getRealmListUri(List<RealmModel> uriList) {
         Log.e(TAG, "getRealmListUri: string uri" + uriList.get(0).getUriString());
         Log.e(TAG, "getRealmListUri size: " + String.valueOf(uriList.size()));
-        realmlList = uriList;
+        realmList = uriList;
         // FIXME: 28.10.2018 короче такая формулировака не зашла!!    this.initPerformList(uriList);
     }
 }
