@@ -18,31 +18,32 @@ import com.example.camera_image.data.RealmModel;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-public class MainPresenterImpl implements MainContract.MainPresenter, MainContract.MainRepository.RepositoryListener {
+public class PresenterImpl implements Contract.Presenter, Contract.Repository.RepositoryListener {
 
-    private static final String TAG = "MainPresenterImpl";
+    private static final String TAG = "PresenterImpl";
     private Context mContext;
-    private MainContract.View mView;
+    private Contract.View mView;
     private Activity mActivity;
-    private static MainContract.MainRepository repository;
+    private static Contract.Repository repository;
+    private static List<RealmModel> realmlList;
     //   private static final int ACTION_CAMERA = 43;
 
-    private static MainPresenterImpl mainPresenter = new MainPresenterImpl();
+    private static PresenterImpl mainPresenter = new PresenterImpl();
 
-    private MainPresenterImpl() {
+    private PresenterImpl() {
     }
 
-    public static MainPresenterImpl getIsntancePresenter() {
-        repository = new MainRepositoryImpl();
+    public static PresenterImpl getIsntancePresenter() {
+        repository = new RepositoryImpl();
         return mainPresenter;
     }
 
 
-//    public MainPresenterImpl(Context context, MainContract.View view, Activity activity) {
+//    public PresenterImpl(Context context, Contract.View view, Activity activity) {
 //        this.context = context;
 //        this.view = view;
 //        this.activity = activity;
-//        repository = new MainRepositoryImpl();
+//        repository = new RepositoryImpl();
 //    }
 
     @Override
@@ -81,7 +82,7 @@ public class MainPresenterImpl implements MainContract.MainPresenter, MainContra
     }
 
     @Override
-    public void initView(MainContract.View view) {
+    public void initView(Contract.View view) {
         mView = view;
     }
 
@@ -101,11 +102,21 @@ public class MainPresenterImpl implements MainContract.MainPresenter, MainContra
         return Uri.parse(path);
     }
 
+//    public static List<RealmModel> getList() {
+//        return realmlList;
+//    }
+
+    @Override
+    public void passListToView() {
+        if (realmlList != null)
+            mView.presentListImages(realmlList);
+    }
 
     @Override
     public void getRealmListUri(List<RealmModel> uriList) {
         Log.e(TAG, "getRealmListUri: string uri" + uriList.get(0).getUriString());
         Log.e(TAG, "getRealmListUri size: " + String.valueOf(uriList.size()));
+        realmlList = uriList;
         // FIXME: 28.10.2018 короче такая формулировака не зашла!!    this.initPerformList(uriList);
     }
 }

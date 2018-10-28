@@ -1,5 +1,6 @@
 package com.example.camera_image;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +13,8 @@ import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.example.camera_image.activity.MainActivity;
 
 import java.util.List;
 import java.util.Timer;
@@ -28,13 +31,13 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         timer = new Timer();
-        timer.schedule(timerTask, 60000, 60000);
+        timer.schedule(timerTask, 0, 60000);
     }
 
     TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            Log.e(TAG, "run: " + " mountain");
+            Log.e(TAG, "run: " + " check");
             notification();
         }
     };
@@ -49,20 +52,9 @@ public class NotificationService extends Service {
     }
 
     private void notification() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("NotificationnService");
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
 
-
-//        Service service = Service.getService(getBaseContext());
-//        List<Rubric> listRubric = service.getRubrics();
-//
-
-
-        Intent intent = new Intent(getBaseContext(), FullScreenNotification.class);
-        intent.putExtra(INTENT_KEY, randomQuote);
-        intent.putExtra(INTENT_KEY_INT, positionRub);
-
-        PendingIntent pendingIntent =
+        @SuppressLint("WrongConstant") PendingIntent pendingIntent =
                 PendingIntent.getActivity(getBaseContext(), 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
         Context context = getApplicationContext();
 
@@ -70,15 +62,12 @@ public class NotificationService extends Service {
 
 
         Notification notification = builder.
-                setContentTitle(title).
-                setContentText(randomQuote).
+                setContentTitle("Image Notification").
+                setContentText("Need to take a new picture").
                 setTicker("New Message Alert").
                 setAutoCancel(true).
-                setSmallIcon(R.drawable.ic_launcher_background).
-                setLargeIcon(bm).
+                setSmallIcon(R.mipmap.ic_launcher_round).
                 setContentIntent(pendingIntent).build();
-//        notification.contentView.setImageViewResource(R.id.icon, R.mipmap.pero_1);
-
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);

@@ -8,10 +8,10 @@ import com.example.camera_image.data.RealmModel;
 
 import java.util.List;
 
-public interface MainContract {
+public interface Contract {
 
 
-    interface MainPresenter {
+    interface Presenter {
 
         void callCamera();
 
@@ -24,6 +24,8 @@ public interface MainContract {
         void initView(View view);
 
         void initPerformList(List<RealmModel> uriList);
+
+        void passListToView();
     }
 
 
@@ -32,7 +34,7 @@ public interface MainContract {
         //   void launchListImageActivity(List<RealmModel> uriList);
     }
 
-    interface MainRepository {
+    interface Repository {
 
         interface RepositoryListener {
             void getRealmListUri(List<RealmModel> uriList);

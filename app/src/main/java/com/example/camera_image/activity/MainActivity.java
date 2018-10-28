@@ -6,14 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.camera_image.mvp.PresenterImpl;
 import com.example.camera_image.utils.Constants;
 import com.example.camera_image.utils.PermissionUtils;
 import com.example.camera_image.R;
-import com.example.camera_image.data.RealmModel;
-import com.example.camera_image.mvp.MainContract;
-import com.example.camera_image.mvp.MainPresenterImpl;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,12 +20,12 @@ import butterknife.OnClick;
 
 // Need to take a new picture
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+public class MainActivity extends AppCompatActivity /*implements Contract.View*/ {
 
-    private MainPresenterImpl presenter;
+    private PresenterImpl presenter;
 
     private void initPresenter() {
-        presenter = MainPresenterImpl.getIsntancePresenter();
+        presenter = PresenterImpl.getIsntancePresenter();
         presenter.initActivityContext(this);
         presenter.initContext(getBaseContext());
         //  presenter.initView(this);
@@ -41,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //   presenter = new MainPresenterImpl(getBaseContext(), this, this);
+        //   presenter = new PresenterImpl(getBaseContext(), this, this);
         initPresenter();
 
     }
@@ -74,12 +70,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 //        startActivity(new Intent(this, ImagesActivity.class));
 //    }
 
-    @Override
+   /* @Override
     public void presentListImages(List<RealmModel> uriList) {
-  /*      Intent intent = new Intent(MainActivity.this, ImagesActivity.class);
+  *//*      Intent intent = new Intent(MainActivity.this, ImagesActivity.class);
 //        intent.
         startActivity(intent);
         // FIXME: 28.10.2018 как передадим целый list через интент??
-*/
-    }
+*//*
+    }*/
 }

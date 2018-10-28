@@ -10,7 +10,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class MainRepositoryImpl implements MainContract.MainRepository {
+public class RepositoryImpl implements Contract.Repository {
 
 
     @Override

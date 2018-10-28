@@ -6,21 +6,23 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.camera_image.R;
 import com.example.camera_image.data.RealmModel;
 import com.example.camera_image.adapter.RecyclerAdapter;
-import com.example.camera_image.mvp.MainContract;
-import com.example.camera_image.mvp.MainPresenterImpl;
+import com.example.camera_image.mvp.Contract;
+import com.example.camera_image.mvp.PresenterImpl;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ImagesActivity extends AppCompatActivity implements MainContract.View {
+public class ImagesActivity extends AppCompatActivity implements Contract.View {
 
-    private MainPresenterImpl presenter;
+    private static final String TAG = "ImagesActivity";
+    private PresenterImpl presenter;
 //    @BindView(R.id.camera_image)
 //    ImageView imageView;
 
@@ -28,7 +30,7 @@ public class ImagesActivity extends AppCompatActivity implements MainContract.Vi
     RecyclerView recyclerView;
 
     private void initPresenter() {
-        presenter = MainPresenterImpl.getIsntancePresenter();
+        presenter = PresenterImpl.getIsntancePresenter();
         presenter.initActivityContext(this);
         presenter.initContext(getBaseContext());
         presenter.initView(this);
@@ -42,6 +44,7 @@ public class ImagesActivity extends AppCompatActivity implements MainContract.Vi
         ButterKnife.bind(this);
 
         initPresenter();
+        presenter.passListToView();
         fillRecyclerView();
     }
 
@@ -50,7 +53,7 @@ public class ImagesActivity extends AppCompatActivity implements MainContract.Vi
         Uri uri = Uri.parse(uriList.get(0).getUriString());
         //     imageView.setImageURI(uri);
         //    else Toast.makeText(ImagesActivity.this, "", Toast.LENGTH_SHORT).show();
-
+        Log.e(TAG, "presentListImages: " + String.valueOf(uriList.size()));
         recyclerView.setAdapter(new RecyclerAdapter(getBaseContext()));
     }
 
