@@ -36,7 +36,7 @@ public class NotificationService extends Service {
     TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            Log.e(TAG, "run: " + " check");
+          //  Log.e(TAG, "run: " + " check");
             notification();
         }
     };

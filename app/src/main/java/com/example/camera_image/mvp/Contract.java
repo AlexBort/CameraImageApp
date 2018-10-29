@@ -3,10 +3,13 @@ package com.example.camera_image.mvp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import com.example.camera_image.data.RealmModel;
 
 import java.util.List;
+
+import io.realm.RealmResults;
 
 public interface Contract {
 
@@ -15,11 +18,15 @@ public interface Contract {
 
         void onDestroy();
 
+        void onCreate();
+
         void callCamera();
 
         void onCameraResult(Intent data);
 
         void initContext(Context context);
+
+        SharedPreferences getPrefs();
 
         void initActivityContext(Activity activity);
 
@@ -30,6 +37,10 @@ public interface Contract {
         void passListToView();
 
         List<RealmModel> getList();
+
+        RealmResults<RealmModel> getRealmResults();
+
+        List<String> getListFromPref();
     }
 
 
@@ -48,9 +59,17 @@ public interface Contract {
 
         void closeRealm();
 
-        void transformToList(String uriString, RepositoryListener listener);
+        void createInstance();
+
+        List<String> getListFromPref(SharedPreferences preferences);
+
+        void transformToRealm(String uriString, RepositoryListener listener);
+
+        void transformToPref(String uriString, SharedPreferences preferences);
 
         List<RealmModel> getList();
+
+        RealmResults<RealmModel> getRealmResults();
         //    void toRealmObject(Uri uri);
     }
 }

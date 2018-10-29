@@ -6,16 +6,16 @@ import io.realm.RealmObject;
 
 public class RealmModel extends RealmObject {
 
-    private String uriString;
+    private String mUriString;
 
     public RealmModel() {
     }
 
-    public String getUriString() {
-        return uriString;
+    public String getmUriString() {
+        return mUriString;
     }
 
-    public void setUriString(String uriString) {
-        this.uriString = uriString;
+    public void setmUriString(String mUriString) {
+        this.mUriString = mUriString;
     }
 }

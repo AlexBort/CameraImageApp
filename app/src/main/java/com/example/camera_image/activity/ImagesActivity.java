@@ -1,5 +1,6 @@
 package com.example.camera_image.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,9 +29,9 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
 
     private void initPresenter() {
         presenter = PresenterImpl.getInstancePresenter();
-        presenter.initActivityContext(this);
+        presenter.initActivityContext(ImagesActivity.this);
         presenter.initContext(getBaseContext());
-
+        presenter.getPrefs();
         // FIXME: 28.10.2018 удалить initView
         // presenter.initView(this);
     }
@@ -38,7 +39,14 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.onDestroy();
+        //    presenter.onDestroy();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //    presenter.onDestroy();
     }
 
     @Override
@@ -46,20 +54,10 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
         ButterKnife.bind(this);
-
         initPresenter();
-        // FIXME: 28.10.2018 удалить потом: presenter.passListToView();
+        //      presenter.onCreate();
         fillRecyclerView();
     }
-
-   /* @Override
-    public void presentListImages(List<RealmModel> uriList) {
-        Uri uri = Uri.parse(uriList.get(0).getUriString());
-        //     imageView.setImageURI(uri);
-        //    else Toast.makeText(ImagesActivity.this, "", Toast.LENGTH_SHORT).show();
-        Log.e(TAG, "presentListImages: " + String.valueOf(uriList.size()));
-        recyclerView.setAdapter(new RecyclerAdapter(getBaseContext()));
-    }*/
 
 
     private void fillRecyclerView() {
@@ -67,11 +65,19 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, mLinearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setLayoutManager(mLinearLayoutManager);
-        if (presenter.getList() != null) {
-            recyclerView.setAdapter(new RecyclerAdapter(getBaseContext(), presenter.getList()));
-            Log.e(TAG, "fillRecyclerView: " + String.valueOf(presenter.getList().size()));
-        }
+        //     if (presenter.getRealmResults() != null) {
+        recyclerView.setAdapter(new RecyclerAdapter(getBaseContext(), presenter.getListFromPref()));
+        Log.e(TAG, "fillRecyclerView: " + String.valueOf(presenter.getListFromPref().size()));
+        Log.e(TAG, "fillRecyclerView: value" + presenter.getListFromPref().get(0));
+        //       }
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ImagesActivity.this,MainActivity.class));
+     //   finish();
+
+    }
 }
