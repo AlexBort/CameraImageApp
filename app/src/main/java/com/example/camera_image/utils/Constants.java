@@ -8,5 +8,4 @@ public interface Constants {
     String PERMISSIONS[] = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     String KEY_PREF = "URIS";
 
-
 }

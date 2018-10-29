@@ -11,44 +11,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.camera_image.R;
-import com.example.camera_image.data.RealmModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.RealmChangeListener;
-import io.realm.RealmResults;
+
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> /*implements RealmChangeListener*/ {
 
     private static final String TAG = "RecyclerAdapter";
     private Context context;
-    private List<RealmModel> uriList;
-    private RealmResults<RealmModel> realmList;
     private List<String> uriStringList;
 
-   /* public RecyclerAdapter(Context context, List<RealmModel> uriList) {
-        this.uriList = uriList;
-        this.context = context;
-    }*/
 
     public RecyclerAdapter(Context context, List<String> uriStringList) {
         this.uriStringList = uriStringList;
         this.context = context;
-    }
-
-//    public RecyclerAdapter(Context context, RealmResults<RealmModel> realmList) {
-//        this.context = context;
-//        this.realmList = realmList;
-//        this.realmList.addChangeListener(this);
-//    }
-
-    public RecyclerAdapter(Context context) {
-        //   this.uriList = uriList;
-        this.context = context;
-
     }
 
 
@@ -63,18 +43,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerAdapter.ViewHolder holder, final int position) {
-        String testUrl = "https://scontent.fiev7-2.fna.fbcdn.net/v/t1.0-9/44961129_676854412698391_7891029656436998144_n.jpg?_nc_cat=100&_nc_ht=scontent.fiev7-2.fna&oh=9b95ae7a2a08919e3ef356d78fe9e46a&oe=5C494D64";
-        //   final Uri uri = Uri.parse(realmList.get(position).getmUriString());
-        //       holder.cameraImage.setImageURI(uri);
-
         final Uri uri = Uri.parse(uriStringList.get(position));
-
 
         if (uriStringList.get(position).length() > 5)
             Picasso.get().load(uri).into(holder.cameraImage);
-        else {
+        else
             holder.view.setVisibility(View.GONE);
-        }
 
 
         holder.shareImage.setOnClickListener(new View.OnClickListener() {
@@ -94,10 +68,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return uriStringList.size();
     }
 
-//    @Override
-//    public void onChange(Object o) {
-//        notifyDataSetChanged();
-//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -112,7 +82,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             super(itemView);
             view = itemView;
             ButterKnife.bind(this, view);
-            //    cameraImage = itemView.findViewById(R.id.camera_image);
         }
 
         public void callShare(final Uri uri) {
@@ -122,7 +91,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             sharingIntent.putExtra(Intent.EXTRA_STREAM, uri /*Uri.parse(realmModel.getUriString())*/);
             view.getContext().startActivity(Intent.createChooser(sharingIntent, "Share Image Using"));
         }
-
-
     }
 }

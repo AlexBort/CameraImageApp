@@ -7,25 +7,24 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-
 import com.example.camera_image.activity.MainActivity;
-
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * this service is not killed after killing app. It's called every minute (due to timer and timerTask) and call notification with info
+ */
 public class NotificationService extends Service {
 
 
     private static final String TAG = "NotificationService";
     private Timer timer;
 
+    /**
+     * make period for the creating of notif: 1 minute. Using for this goal: Timer class
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,7 +35,6 @@ public class NotificationService extends Service {
     TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-          //  Log.e(TAG, "run: " + " check");
             notification();
         }
     };
@@ -49,6 +47,9 @@ public class NotificationService extends Service {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
+    /**
+     * create notification
+     */
     private void notification() {
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
 

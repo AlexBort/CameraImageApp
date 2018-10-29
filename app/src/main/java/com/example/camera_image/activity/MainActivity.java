@@ -6,19 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.example.camera_image.mvp.Contract;
 import com.example.camera_image.mvp.PresenterImpl;
 import com.example.camera_image.utils.Constants;
 import com.example.camera_image.utils.PermissionUtils;
 import com.example.camera_image.R;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class MainActivity extends AppCompatActivity /*implements Contract.View*/ {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private PresenterImpl presenter;
@@ -30,27 +26,7 @@ public class MainActivity extends AppCompatActivity /*implements Contract.View*/
         ButterKnife.bind(this);
 
         initPresenter();
-
-        Toast.makeText(MainActivity.this, "onCreate()", Toast.LENGTH_SHORT).show();
-        //      presenter.getList(); // FIXME: 28.10.2018 нужно ли здесь вызывать!?
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Toast.makeText(MainActivity.this, "onStart()", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.onDestroy();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        presenter.onDestroy();
+        //    Toast.makeText(MainActivity.this, "onCreate()", Toast.LENGTH_SHORT).show();
     }
 
     private void initPresenter() {
@@ -60,13 +36,17 @@ public class MainActivity extends AppCompatActivity /*implements Contract.View*/
         presenter.getPrefs();
     }
 
-
+    /**
+     * calling ImagesActivity by clicking on callActivity button
+     */
     @OnClick(R.id.call_activity)
     public void startImageActivity() {
         startActivity(new Intent(MainActivity.this, ImagesActivity.class));
-        //    finish();
     }
 
+    /**
+     * calling camera app
+     */
     @OnClick(R.id.button_camera)
     public void openCamera() {
         if (PermissionUtils.checkPermission(this, Constants.PERMISSIONS))
