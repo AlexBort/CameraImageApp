@@ -32,8 +32,6 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
         presenter.initActivityContext(ImagesActivity.this);
         presenter.initContext(getBaseContext());
         presenter.getPrefs();
-        // FIXME: 28.10.2018 удалить initView
-        // presenter.initView(this);
     }
 
     @Override
@@ -62,8 +60,8 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
 
     private void fillRecyclerView() {
         final LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(ImagesActivity.this);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, mLinearLayoutManager.getOrientation());
-        recyclerView.addItemDecoration(itemDecoration);
+   //     DividerItemDecoration itemDecoration = new DividerItemDecoration(this, mLinearLayoutManager.getOrientation());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getBaseContext(),0));
         recyclerView.setLayoutManager(mLinearLayoutManager);
         //     if (presenter.getRealmResults() != null) {
         recyclerView.setAdapter(new RecyclerAdapter(getBaseContext(), presenter.getListFromPref()));
@@ -77,7 +75,5 @@ public class ImagesActivity extends AppCompatActivity /*implements Contract.View
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(ImagesActivity.this,MainActivity.class));
-     //   finish();
-
     }
 }

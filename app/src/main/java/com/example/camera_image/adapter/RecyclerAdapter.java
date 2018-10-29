@@ -69,7 +69,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         final Uri uri = Uri.parse(uriStringList.get(position));
 
-        Picasso.get().load(uri).into(holder.cameraImage);
+
+        if (uriStringList.get(position).length() > 5)
+            Picasso.get().load(uri).into(holder.cameraImage);
+        else {
+            holder.view.setVisibility(View.GONE);
+        }
 
 
         holder.shareImage.setOnClickListener(new View.OnClickListener() {

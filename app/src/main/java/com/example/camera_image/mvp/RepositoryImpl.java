@@ -47,7 +47,6 @@ public class RepositoryImpl implements Contract.Repository {
     }
 
 
-
     @Override
     public void transformToPref(String uriString, SharedPreferences preferences) {
         stringUriList.add(uriString);
@@ -63,23 +62,14 @@ public class RepositoryImpl implements Contract.Repository {
         Log.e(TAG, "oldeResults: " + wordsString);
 
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(Constants.KEY_PREF, wordsString + stringBuilder.toString());
+        if (wordsString.length() > 3)
+            editor.putString(Constants.KEY_PREF, wordsString + stringBuilder.toString());
+        else
+            editor.putString(Constants.KEY_PREF, /*wordsString + */stringBuilder.toString());
         String newWord = /*wordsString +*/ stringBuilder.toString();
         Log.e(TAG, "newResults: " + newWord);
         editor.apply();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private RealmModel toRealmObject(String uriString) {
